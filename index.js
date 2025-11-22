@@ -6,8 +6,18 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+await MongoDatabase.connect();
+
 app.get('/health', (req, res) => {
-  res.status(200).json("OK");
+  const healthStatus = {
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    database: MongoDatabase.isConnected() ? 'Connected' : 'Disconnected'
+  };
+  
+  const statusCode = MongoDatabase.isConnected() ? 200 : 503;
+  res.status(statusCode).json(healthStatus);
 });
 
 app.listen(PORT, () => {
