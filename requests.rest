@@ -1,0 +1,198 @@
+### Health Check
+GET http://localhost:3000/health
+
+### ============== POSTS API ==============
+
+### 1. Add a New Post
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+  "title": "My First Post",
+  "content": "This is the content of my first post",
+  "sender": "user123"
+}
+
+###
+
+### Add Another Post (same sender)
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+  "title": "My Second Post",
+  "content": "More interesting content here",
+  "sender": "user123"
+}
+
+###
+
+### Add Post from Different Sender
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+  "title": "Hello World",
+  "content": "First post from another user",
+  "sender": "user456"
+}
+
+###
+
+### 2. Get All Posts
+GET http://localhost:3000/post
+
+###
+
+### 3. Get a Post by ID
+GET http://localhost:3000/post/1
+
+###
+
+### Get a Post by ID (non-existent)
+GET http://localhost:3000/post/999
+
+###
+
+### 4. Get Posts by Sender
+GET http://localhost:3000/post?sender=user123
+
+###
+
+### Get Posts by Another Sender
+GET http://localhost:3000/post?sender=user456
+
+###
+
+### 5. Update a Post (PUT)
+PUT http://localhost:3000/post/1
+Content-Type: application/json
+
+{
+  "title": "Updated Post Title",
+  "content": "This post has been updated with new content",
+  "sender": "user123"
+}
+
+###
+
+### Update Post (non-existent)
+PUT http://localhost:3000/post/999
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "content": "Test content",
+  "sender": "user123"
+}
+
+###
+
+### Delete a Post (optional)
+DELETE http://localhost:3000/post/2
+
+###
+
+### ============== COMMENTS API ==============
+
+### Create a Comment
+POST http://localhost:3000/comment
+Content-Type: application/json
+
+{
+  "content": "Great post! Very informative.",
+  "author": "commenter1",
+  "postId": 1
+}
+
+###
+
+### Create Another Comment on Same Post
+POST http://localhost:3000/comment
+Content-Type: application/json
+
+{
+  "content": "I totally agree with this!",
+  "author": "commenter2",
+  "postId": 1
+}
+
+###
+
+### Create Comment on Different Post
+POST http://localhost:3000/comment
+Content-Type: application/json
+
+{
+  "content": "Interesting perspective.",
+  "author": "commenter1",
+  "postId": 3
+}
+
+###
+
+### Create Comment (non-existent post)
+POST http://localhost:3000/comment
+Content-Type: application/json
+
+{
+  "content": "This should fail",
+  "author": "commenter1",
+  "postId": 999
+}
+
+###
+
+### Get All Comments
+GET http://localhost:3000/comment
+
+###
+
+### Get Comments by Post ID
+GET http://localhost:3000/comment?postId=1
+
+###
+
+### Get a Comment by ID
+GET http://localhost:3000/comment/1
+
+###
+
+### Get Comment by ID (non-existent)
+GET http://localhost:3000/comment/999
+
+###
+
+### Update a Comment (PUT)
+PUT http://localhost:3000/comment/1
+Content-Type: application/json
+
+{
+  "content": "Updated comment: Even more insightful now!",
+  "author": "commenter1",
+  "postId": 1
+}
+
+###
+
+### Update Comment (non-existent)
+PUT http://localhost:3000/comment/999
+Content-Type: application/json
+
+{
+  "content": "Test",
+  "author": "test",
+  "postId": 1
+}
+
+###
+
+### Delete a Comment
+DELETE http://localhost:3000/comment/2
+
+###
+
+### Delete Comment (non-existent)
+DELETE http://localhost:3000/comment/999
+
+###
